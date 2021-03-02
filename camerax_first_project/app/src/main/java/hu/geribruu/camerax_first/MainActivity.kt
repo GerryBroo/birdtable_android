@@ -3,15 +3,28 @@ package hu.geribruu.camerax_first
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.Manifest
+import android.app.Activity
 import android.content.pm.PackageManager
+import android.hardware.camera2.CameraAccessException
+import android.hardware.camera2.CameraCharacteristics
+import android.hardware.camera2.CameraManager
 import android.net.Uri
+import android.os.Build
 import android.util.Log
+import android.util.Log.DEBUG
+import android.util.SparseIntArray
+import android.view.Surface
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import java.util.concurrent.Executors
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.label.ImageLabeling
+import com.google.mlkit.vision.label.defaults.ImageLabelerOptions
+import hu.geribruu.camerax_first.BuildConfig.DEBUG
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 import java.nio.ByteBuffer
@@ -100,12 +113,18 @@ class MainActivity : AppCompatActivity() {
 
             imageCapture = ImageCapture.Builder().build()
 
-            val imageAnalyzer = ImageAnalysis.Builder()
+       /*     val imageAnalyzer = ImageAnalysis.Builder()
                     .build()
                     .also {
                         it.setAnalyzer(cameraExecutor, LuminosityAnalyzer { luma ->
                             Log.d(TAG, "Average luminosity: $luma")
                         })
+                    }
+*/
+            val imageAnalyzer = ImageAnalysis.Builder()
+                    .build()
+                    .also {
+                        it.setAnalyzer(cameraExecutor, YourImageAnalyzer() )
                     }
 
             // Select back camera as a default
@@ -171,16 +190,56 @@ class MainActivity : AppCompatActivity() {
             return data // Return the byte array
         }
 
-        override fun analyze(image: ImageProxy) {
+        override fun analyze(imageProxy: ImageProxy) {
 
-            val buffer = image.planes[0].buffer
+            val buffer = imageProxy.planes[0].buffer
             val data = buffer.toByteArray()
             val pixels = data.map { it.toInt() and 0xFF }
             val luma = pixels.average()
 
+
             listener(luma)
 
-            image.close()
+            imageProxy.close()
         }
     }
+
+    private class YourImageAnalyzer : ImageAnalysis.Analyzer {
+
+        override fun analyze(imageProxy: ImageProxy) {
+
+            val buffer = imageProxy.planes[0].buffer
+
+            val image = InputImage.fromByteBuffer(
+                        buffer,
+                        /* image width */ 480,
+                        /* image height */ 360,
+                        imageProxy.imageInfo.rotationDegrees,
+                        InputImage.IMAGE_FORMAT_NV21 // or IMAGE_FORMAT_YV12
+                )
+
+            val labeler = ImageLabeling.getClient(ImageLabelerOptions.DEFAULT_OPTIONS)
+
+            labeler.process(image)
+                    .addOnSuccessListener { labels ->
+                        // Task completed successfully
+                        // ...
+
+                        for (label in labels) {
+                            val text = label.text
+                            val confidence = label.confidence
+                            val index = label.index
+
+                            Log.d(TAG,"txt :" + text)
+                        }
+                    }
+                    .addOnFailureListener { e ->
+                        // Task failed with an exception
+                        // ...
+                    }
+
+        }
+    }
+
+
 }
