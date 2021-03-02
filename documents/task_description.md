@@ -12,8 +12,3 @@ Az alkalmazás célja, hogy egy (a fejlesztés során mobiltelefonnal szimulált
     Az applikácó megnyítása után megjelenik a kamera képünk, amely már képes érzékelni a madarakat. A képernyőn továbbá elhelyezkedik egy gomb, amely a galériát nyitja meg. Itt listázodik ki az összes madár érzékelése névvel, képpel és dátummal. A listából lehet törölni az elemeket. 
 
     A kamera és a galéria fragment-ként épül fel. A galérai megjelenése recyclerview lesz, melyek közül az elemek megnyithatóak és törölhetőek.
-
-
-## Spec véglegesítése
-
-tárolás a felhőben? - firebase?
