@@ -3,6 +3,7 @@ package hu.geribruu.birddetection_first
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
+import android.content.res.AssetManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -83,7 +84,7 @@ class MainActivity : AppCompatActivity() {
         }, ContextCompat.getMainExecutor(this))
 
         val localModel = LocalModel.Builder()
-            .setAbsoluteFilePath("bird_detection.tflite")
+            .setAssetFilePath("bird_detection.tflite")
             .build()
 
         val customObjectDetectorOption = CustomObjectDetectorOptions.Builder(localModel)
