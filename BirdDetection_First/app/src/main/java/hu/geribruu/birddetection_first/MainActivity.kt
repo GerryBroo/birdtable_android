@@ -3,12 +3,10 @@ package hu.geribruu.birddetection_first
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
-import android.content.res.AssetManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.util.Size
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
@@ -18,13 +16,8 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LifecycleOwner
 import com.google.common.util.concurrent.ListenableFuture
-import com.google.mlkit.common.model.LocalModel
-import com.google.mlkit.vision.common.InputImage
-import com.google.mlkit.vision.objects.ObjectDetection
 import com.google.mlkit.vision.objects.ObjectDetector
-import com.google.mlkit.vision.objects.custom.CustomObjectDetectorOptions
 import hu.geribruu.birddetection_first.databinding.ActivityMainBinding
-import hu.geribruu.birddetection_first.utils.Draw
 
 class MainActivity : AppCompatActivity() {
 
@@ -82,19 +75,6 @@ class MainActivity : AppCompatActivity() {
             bindPreview(cameraProvider = cameraProvider)
 
         }, ContextCompat.getMainExecutor(this))
-
-        val localModel = LocalModel.Builder()
-            .setAssetFilePath("bird_detection.tflite")
-            .build()
-
-        val customObjectDetectorOption = CustomObjectDetectorOptions.Builder(localModel)
-            .setDetectorMode(CustomObjectDetectorOptions.STREAM_MODE)
-            .enableClassification()
-            .setClassificationConfidenceThreshold(0.5f)
-            .setMaxPerObjectLabelCount(3)
-            .build()
-
-        objectDetector = ObjectDetection.getClient(customObjectDetectorOption)
     }
 
     @SuppressLint("UnsafeExperimentalUsageError")
@@ -113,35 +93,8 @@ class MainActivity : AppCompatActivity() {
             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
             .build()
 
-        imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(this), { imageProxy ->
-            val rotationDegrees = imageProxy.imageInfo.rotationDegrees
-
-            val image = imageProxy.image
-
-            if(image != null) {
-                val processImage = InputImage.fromMediaImage(image, rotationDegrees)
-
-                objectDetector.process(processImage)
-                    .addOnSuccessListener { objects ->
-
-                        for (i in objects) {
-
-                            if(binding.parentLayout.childCount > 1)  {
-                                binding.parentLayout.removeViewAt(1)
-                            }
-
-                            val element = Draw(context = this, rect = i.boundingBox, text = i.labels.firstOrNull()?.text ?: "Undefined")
-                            binding.parentLayout.addView(element,1)
-                        }
-
-
-                        imageProxy.close()
-                    }.addOnFailureListener {
-                        Log.v("MainActivity", "Error - ${it.message}")
-                        imageProxy.close()
-                    }
-            }
-        })
+        imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(this),
+            ImageAnalyzer(this, binding) )
 
         cameraProvider.bindToLifecycle(this as LifecycleOwner, cameraSelector, imageAnalysis, preview)
     }

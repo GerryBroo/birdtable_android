@@ -20,3 +20,13 @@ Elkezdtem megismerkedni a CameraX API-val. A google developers oldalon egy remek
  * **Növény betegség detektálás**: Ezzel foglalkoznék utoljára. Ha nem marad rá idő akkor nyári projektnek tovább vinném. Jelenleg nem találtam megfelelő adatbázist. Szeretném felkeresni egy távoli ismerőst, aki mélyebben foglalkozik a nővénnyekkel, hogy egyáltalán megvalósítható-e a feladat. Ezután szeretnék felkeresni kerteket és kertészeteket, hátha van nekik privát képeik, amiket megosztanának velem.
 
  A **specifikációt** véglegesítettem, amennyire csak tudtam. Ha további funkciókat szeretnék implementálni, akkor bővíteni fogom.
+
+Egy tensorflow sample tutoriál segítségével létrehoztam egy alkalmazást, amely felismer 5 fajta növényt. 
+
+Tovább folytattam az alap alkalmazások elkészítését. A BirdDetection_First appban a cameraX-et és mlkit object detection használok. A TFHub-ról letöltöttem egy tflite fájlt, ami a madarakról tartalmaz neurális hálozatot. Az alkalmazás indításakor egy hibába ütköztem, mivel nem volt képes megnyitni a .tflite fájlt.
+
+## 4.hét - 03.03. - 03.09.
+
+A konzultációs alkalmon segítséget kaptam a fájl megnyitására, így sikerült megváltoztatni a kódot és működésre bírni az alkalmazást. A teszteléshez youtube videókat indítottam el. A tesztelést néhol megnehezíti, hogy a monitort mutatom a kamerának, így nem a legpontossabb és leggyorsabb az érzékelése. Továbbá a madár fajának latin nevével dolgozik, így sokszor rá kell keressni, hogy valóban az az a madár amít kiír. A következő célkítüzésem, hogy normális strukturába rendezzem a programot, úgy hogy az általam kitüzőtt funkciókra bővíthető legyen.
+
+Első lépésnek szétszedtem az Analisyrt egy külön osztályba. MVVM-et választottam architekrurára, így még mielőtt tovább haladnék ennek nézek részletesen utána.
