@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -30,6 +31,13 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    aaptOptions {
+        noCompress "tflite" // To avoid ML model compression
+    }
+    dataBinding {
+        enabled = true // To enable data binding
+    }
 }
 
 dependencies {
@@ -42,4 +50,10 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation 'com.google.mlkit:object-detection-custom:16.3.1'
+
+    implementation "androidx.camera:camera-camera2:1.1.0-alpha02"
+    implementation "androidx.camera:camera-lifecycle:1.1.0-alpha02"
+    implementation "androidx.camera:camera-view:1.0.0-alpha22"
 }
