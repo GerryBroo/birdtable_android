@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
 
-    private lateinit var objectDetector : ObjectDetector
     private lateinit var cameraProviderFuture : ListenableFuture<ProcessCameraProvider>
 
     companion object {

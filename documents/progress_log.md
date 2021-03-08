@@ -30,3 +30,5 @@ Tovább folytattam az alap alkalmazások elkészítését. A BirdDetection_First
 A konzultációs alkalmon segítséget kaptam a fájl megnyitására, így sikerült megváltoztatni a kódot és működésre bírni az alkalmazást. A teszteléshez youtube videókat indítottam el. A tesztelést néhol megnehezíti, hogy a monitort mutatom a kamerának, így nem a legpontossabb és leggyorsabb az érzékelése. Továbbá a madár fajának latin nevével dolgozik, így sokszor rá kell keressni, hogy valóban az az a madár amít kiír. A következő célkítüzésem, hogy normális strukturába rendezzem a programot, úgy hogy az általam kitüzőtt funkciókra bővíthető legyen.
 
 Első lépésnek szétszedtem az Analisyrt egy külön osztályba. MVVM-et választottam architekrurára, így még mielőtt tovább haladnék ennek nézek részletesen utána.
+
+A hét folyamán sok oldalt és videót néztem az MVVM-ről, így megértettem alapszinten a működését. Első sorban a galéria elkészítése során szeretném használni. A kamera képre nem szeretnék rajzolni semmit, csak a tesztelés miatt rajzoltam ki eddig. Azonban gyakorlásképpen, hogy beletanuljak az MVVP-be a kamera képére egy szöveget fogok kiírni. 
