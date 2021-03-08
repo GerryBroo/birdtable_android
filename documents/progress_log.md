@@ -31,4 +31,6 @@ A konzultációs alkalmon segítséget kaptam a fájl megnyitására, így siker
 
 Első lépésnek szétszedtem az Analisyrt egy külön osztályba. MVVM-et választottam architekrurára, így még mielőtt tovább haladnék ennek nézek részletesen utána.
 
-A hét folyamán sok oldalt és videót néztem az MVVM-ről, így megértettem alapszinten a működését. Első sorban a galéria elkészítése során szeretném használni. A kamera képre nem szeretnék rajzolni semmit, csak a tesztelés miatt rajzoltam ki eddig. Azonban gyakorlásképpen, hogy beletanuljak az MVVP-be a kamera képére egy szöveget fogok kiírni. 
+A hét folyamán sok oldalt és videót néztem az MVVM-ről, így megértettem alapszinten a működését. Első sorban a galéria elkészítése során szeretném használni. A kamera képre nem szeretnék rajzolni semmit, csak a tesztelés miatt rajzoltam ki eddig. Azonban gyakorlásképpen, hogy beletanuljak az MVVP-be a kamera képére egy szöveget fogok kiírni.
+
+Elkészítettem a project_birdtable-t. A Basic Activity alapot választottam, így kaptam egy mainactivty-t és 2 fragmentet. Az OptionMenu-t egyből commenteztem, mivel egyenlőre erre nem lesz szükségem. Továbbiakban átneveztem a fragmenteket és layoutokat. Megvalósítottam a CameraFragment-nek egy FAB-ot, hogy a 2 fragment között továbbra is működjön a váltás.

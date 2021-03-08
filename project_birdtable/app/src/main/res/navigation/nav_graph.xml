@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="hu.geribruu.project_birdtable.CameraFragment"
+        android:name="hu.geribruu.project_birdtable.camera.CameraFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_camera">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/GaleryFragment"
-        android:name="hu.geribruu.project_birdtable.GaleryFragment"
+        android:name="hu.geribruu.project_birdtable.galery.GaleryFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_galery">
 
