@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/CameraFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/CameraFragment"
         android:name="hu.geribruu.project_birdtable.camera.CameraFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_camera">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            android:id="@+id/action_CameraFragment_to_GaleryFragment"
             app:destination="@id/GaleryFragment" />
     </fragment>
     <fragment
@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_galery">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_GaleryFragment_to_CameraFragment"
+            app:destination="@id/CameraFragment" />
     </fragment>
 </navigation>

@@ -26,7 +26,7 @@ class GaleryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<Button>(R.id.button_galery).setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+            findNavController().navigate(R.id.action_GaleryFragment_to_CameraFragment)
         }
     }
 }
