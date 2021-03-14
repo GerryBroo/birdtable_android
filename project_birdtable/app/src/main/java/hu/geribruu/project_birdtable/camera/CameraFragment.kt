@@ -3,19 +3,20 @@ package hu.geribruu.project_birdtable.camera
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.util.Size
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.camera.core.*
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.ImageCapture
+import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -23,22 +24,22 @@ import com.google.common.util.concurrent.ListenableFuture
 import hu.geribruu.project_birdtable.R
 import hu.geribruu.project_birdtable.camera.analyzer.ImageAnalyzer
 import hu.geribruu.project_birdtable.databinding.FragmentCameraBinding
-import java.io.File
-import java.text.SimpleDateFormat
-import java.util.*
+import kotlinx.android.synthetic.main.fragment_camera.*
 
 class CameraFragment : Fragment() {
-
-    companion object {
-        private const val REQUEST_CODE_PERMISSIONS = 10
-        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
-    }
 
     /** Binding */
     private var _binding : FragmentCameraBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var cameraProviderFuture : ListenableFuture<ProcessCameraProvider>
+
+    private var imageCapture: ImageCapture? = null
+
+    companion object {
+        private const val REQUEST_CODE_PERMISSIONS = 10
+        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,6 +69,10 @@ class CameraFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<FloatingActionButton>(R.id.fab_cameraFragment).setOnClickListener {
             findNavController().navigate(R.id.action_CameraFragment_to_GaleryFragment)
+        }
+
+        btn_takePhoto_cameraFragment.setOnClickListener {
+            PhotoCaptureController(activity, context, imageCapture).takePhoto()
         }
     }
 
@@ -122,6 +127,9 @@ class CameraFragment : Fragment() {
 
         preview.setSurfaceProvider(binding.previewView.surfaceProvider)
 
+        imageCapture = ImageCapture.Builder()
+                .build()
+
         val imageAnalysis = ImageAnalysis.Builder()
             .setTargetResolution(Size(1280, 720))
             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
@@ -129,6 +137,6 @@ class CameraFragment : Fragment() {
 
         imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(context), ImageAnalyzer(binding))
 
-        cameraProvider.bindToLifecycle(this as LifecycleOwner, cameraSelector, imageAnalysis, preview)
+        cameraProvider.bindToLifecycle(this as LifecycleOwner, cameraSelector, preview, imageCapture, imageAnalysis)
     }
 }
