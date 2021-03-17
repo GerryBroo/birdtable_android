@@ -4,11 +4,12 @@ import com.google.mlkit.common.model.LocalModel
 import com.google.mlkit.vision.objects.ObjectDetection
 import com.google.mlkit.vision.objects.custom.CustomObjectDetectorOptions
 
-class ObjectDetector(private val tflite : String) {
+class CustomObjectDetector(tflite : String) {
 
     private val localModel : LocalModel = LocalModel.Builder()
             .setAssetFilePath(tflite)
             .build()
+        get() = field
 
     private val customObjectDetectorOption = CustomObjectDetectorOptions.Builder(localModel)
             .setDetectorMode(CustomObjectDetectorOptions.STREAM_MODE)
@@ -17,7 +18,6 @@ class ObjectDetector(private val tflite : String) {
             .setMaxPerObjectLabelCount(1)
             .build()
 
-    private var objectDetector = ObjectDetection.getClient(customObjectDetectorOption)
-        get() = field
+   val objectDetector = ObjectDetection.getClient(customObjectDetectorOption)
 
 }

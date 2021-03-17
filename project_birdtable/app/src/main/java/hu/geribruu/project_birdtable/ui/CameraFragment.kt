@@ -24,7 +24,7 @@ import com.google.common.util.concurrent.ListenableFuture
 import hu.geribruu.project_birdtable.R
 import hu.geribruu.project_birdtable.camera.PhotoCaptureController
 import hu.geribruu.project_birdtable.camera.analyzer.ImageAnalyzer
-import hu.geribruu.project_birdtable.camera.objectdetector.ObjectDetector
+import hu.geribruu.project_birdtable.camera.objectdetector.CustomObjectDetector
 import hu.geribruu.project_birdtable.databinding.FragmentCameraBinding
 import kotlinx.android.synthetic.main.fragment_camera.*
 
@@ -137,10 +137,9 @@ class CameraFragment : Fragment() {
             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
             .build()
 
-        var birdObjectDetector = ObjectDetector("bird_detection.tflite")
+        val birdObjectDetector = CustomObjectDetector("bird_detection.tflite")
 
-
-        imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(context), ImageAnalyzer(binding,))
+        imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(context), ImageAnalyzer(binding, birdObjectDetector.objectDetector))
 
         cameraProvider.bindToLifecycle(this as LifecycleOwner, cameraSelector, preview, imageCapture, imageAnalysis)
     }
