@@ -1,4 +1,4 @@
-package hu.geribruu.project_birdtable.camera
+package hu.geribruu.project_birdtable.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -22,6 +22,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.common.util.concurrent.ListenableFuture
 import hu.geribruu.project_birdtable.R
+import hu.geribruu.project_birdtable.camera.PhotoCaptureController
 import hu.geribruu.project_birdtable.camera.analyzer.ImageAnalyzer
 import hu.geribruu.project_birdtable.databinding.FragmentCameraBinding
 import kotlinx.android.synthetic.main.fragment_camera.*

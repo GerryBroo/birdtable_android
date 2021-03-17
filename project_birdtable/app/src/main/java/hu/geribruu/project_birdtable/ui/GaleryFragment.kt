@@ -1,4 +1,4 @@
-package hu.geribruu.project_birdtable.galery
+package hu.geribruu.project_birdtable.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
