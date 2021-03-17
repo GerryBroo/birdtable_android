@@ -3,13 +3,28 @@ package hu.geribruu.project_birdtable
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import hu.geribruu.project_birdtable.R
+import java.io.File
 
 class MainActivity : AppCompatActivity() {
+
+    companion object OutputFileUri {
+        lateinit var outputFileUri : String
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
+
+        outputFileUri = getOutputDirectory()
+    }
+
+    private fun getOutputDirectory(): String {
+
+        val mediaDir = externalMediaDirs?.firstOrNull().let {
+            File(it, resources.getString(R.string.app_name)).apply { mkdirs() } }
+        return if (mediaDir.exists())
+            mediaDir.toString() else filesDir.toString()
     }
 
 

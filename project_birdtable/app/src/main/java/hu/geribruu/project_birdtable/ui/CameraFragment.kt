@@ -74,7 +74,7 @@ class CameraFragment : Fragment() {
         }
 
         btn_takePhoto_cameraFragment.setOnClickListener {
-            PhotoCaptureController(activity, context, imageCapture).takePhoto()
+            PhotoCaptureController(context, imageCapture).takePhoto()
         }
     }
 

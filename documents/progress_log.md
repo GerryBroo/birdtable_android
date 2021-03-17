@@ -40,3 +40,10 @@ Az előző example projektem segítségével megvalósítottam a madár érzéke
 ## 5.hét - 03.10. - 03.16.
 
 Leimplementáltam a PhotoCaptureCOntroller-t, melynek segítségével a program képes kamerakép elmentésére.
+
+## 6.hét - 03.17. - 03.23.
+
+A hét első napján elkezdtem kijavítani a megbeszélt problémákat.
+* Létrehoztam egy UI package-t, amibe refactoráltam a Fragmenteket és továbbá oda fogom létrehozni a VM-eket is.
+* Szétválasztottam az Analyzer-t a TFModel-től egy külön osztályba. Ezt úgy hoztam létre, hogy bármely tflite-ot képes legyen feldolgozni.
+* Szétválasztottam a PhotoCaptureController-t a file path elérési metódustól. Ezt a MainActivity-be helyeztem el, ahol egy companion object-ként bármelyik osztály elére. (Egyenlőre nem vagyok benne biztos, hogy ennek itt van a megfelelő helye, de itt működik)

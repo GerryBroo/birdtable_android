@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
 import android.view.View
+import hu.geribruu.project_birdtable.camera.PhotoCaptureController
 
 class Draw(context : Context?, var rect: Rect, var text : String) : View(context) {
 
