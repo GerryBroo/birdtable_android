@@ -6,15 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".ui.GaleryFragment">
 
-    <TextView
-        android:id="@+id/textview_galery"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/button_galery"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/galery_todo"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_galery"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </androidx.recyclerview.widget.RecyclerView>
 
     <Button
         android:id="@+id/button_galery"
@@ -23,6 +19,5 @@
         android:text="@string/previous"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_galery" />
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
