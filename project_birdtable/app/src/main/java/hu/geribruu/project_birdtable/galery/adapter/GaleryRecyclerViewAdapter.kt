@@ -1,21 +1,29 @@
 package hu.geribruu.project_birdtable.galery.adapter
 
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import de.hdodenhof.circleimageview.CircleImageView
 import hu.geribruu.project_birdtable.R
 import hu.geribruu.project_birdtable.galery.model.Bird
 import kotlinx.android.synthetic.main.layout_galery_listitem.view.*
+import java.io.File
+
 
 class GaleryRecyclerViewAdapter : RecyclerView.Adapter<GaleryRecyclerViewAdapter.ViewHolder>() {
 
     private val birdList = mutableListOf<Bird>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_galery_listitem, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(
+            R.layout.layout_galery_listitem,
+            parent,
+            false
+        )
         return ViewHolder(view)
     }
 
@@ -25,19 +33,31 @@ class GaleryRecyclerViewAdapter : RecyclerView.Adapter<GaleryRecyclerViewAdapter
         holder.bird = bird
 
         holder.tvBirdName.text = bird.name
+        holder.tvBirdCaptureDate.text = bird.captureDate
+        holder.tvBirdUrl.text = bird.imageUrl
+
+        val imgFile = File(bird.imageUrl)
+        if (imgFile.exists()) {
+            val myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
+            holder.imgBird.setImageBitmap(myBitmap)
+        }
     }
 
     override fun getItemCount() = birdList.size
 
-    fun addAll(birds : List<Bird>) {
+    fun addAll(birds: List<Bird>) {
         val size = birdList.size
         birdList += birds
         notifyItemRangeInserted(size, birds.size)
     }
 
-    inner class ViewHolder(view : View) : RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        val tvBirdName : TextView = view.tv_galery_item
+        val tvBirdName : TextView = view.tv_name_galery_item
+        val tvBirdCaptureDate : TextView = view.tv_date_galery_item
+        val tvBirdUrl : TextView = view.tv_url_galery_item
+
+        val imgBird : CircleImageView = view.img_galery_item
 
         var bird : Bird? = null
     }

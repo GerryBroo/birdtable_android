@@ -1,18 +1,22 @@
 package hu.geribruu.project_birdtable.ui
 
+import android.R.attr.path
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.LinearLayout
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import hu.geribruu.project_birdtable.MainActivity
 import hu.geribruu.project_birdtable.R
 import hu.geribruu.project_birdtable.galery.adapter.GaleryRecyclerViewAdapter
 import hu.geribruu.project_birdtable.galery.model.Bird
 import kotlinx.android.synthetic.main.fragment_galery.*
+import java.io.File
+
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -22,7 +26,11 @@ class GaleryFragment : Fragment() {
     private var birds = mutableListOf<Bird>()
     private lateinit var galeryRecyclerViewAdapter : GaleryRecyclerViewAdapter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_galery, container, false)
     }
 
@@ -37,12 +45,14 @@ class GaleryFragment : Fragment() {
     }
 
     private fun initBirds() {
-        val b1 = Bird("Sas", "Most", "a telefonon")
-        val b2 = Bird("Papagáj", "Most", "a telefonon")
-        val b3 = Bird("Galamb", "Most", "a telefonon")
-        birds.add(b1)
-        birds.add(b2)
-        birds.add(b3)
+
+        val directory: File = File(MainActivity.outputFileUri)
+        val files = directory.listFiles()
+        Log.d("Files", "Size: " + files.size)
+        for (i in files.indices) {
+            Log.d("Files", "FileName:" + files[i].name)
+            birds.add(Bird("Sasmadár", files[i].name, files[i].absolutePath))
+        }
 
         setupRecyclerView()
     }

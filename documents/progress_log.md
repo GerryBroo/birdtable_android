@@ -47,3 +47,8 @@ A hét első napján elkezdtem kijavítani a megbeszélt problémákat.
 * Létrehoztam egy UI package-t, amibe refactoráltam a Fragmenteket és továbbá oda fogom létrehozni a VM-eket is.
 * Szétválasztottam az Analyzer-t a TFModel-től egy külön osztályba. Ezt úgy hoztam létre, hogy bármely tflite-ot képes legyen feldolgozni.
 * Szétválasztottam a PhotoCaptureController-t a file path elérési metódustól. Ezt a MainActivity-be helyeztem el, ahol egy companion object-ként bármelyik osztály elére. (Egyenlőre nem vagyok benne biztos, hogy ennek itt van a megfelelő helye, de itt működik)
+
+Sikeresen implementáltam a galéria recyclerview-t. Egyenlőre az android képét használja, illetve egy előre betáplált nevet tartalmaz. A következő lépésem lesz a kép beolvasása.
+sikeresen kiegészítettem a galériát a képek beolvasásával. Eléri a képeket és a nevűket is.
+<br>Először arra gondoltam, hogy leegyszerűsítve a feladatot a képeket úgy mentem el, hogy már tartalmazza a madár nevét, a kép idejét így egyszerűen be tudom olvasni és kiírni, de szeretnék tanulni egy kis adatbázist, ezért mindent egy adatbázisba fogok elmenti, az url-t is egy string-ként, így az adatbázisól kiolvasva az elérési útvonalat a program megtalálja a képet.
+<br>Erre a feladatra Room-ot szeretnék használni, mivel azt már használtam, így van egy kis fogalmam róla.
