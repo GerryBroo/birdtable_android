@@ -2,7 +2,6 @@ package hu.geribruu.project_birdtable
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import hu.geribruu.project_birdtable.R
 import java.io.File
 
 class MainActivity : AppCompatActivity() {
