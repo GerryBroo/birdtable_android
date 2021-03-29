@@ -1,4 +1,4 @@
-package hu.geribruu.project_birdtable.database
+package hu.geribruu.project_birdtable.database.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -19,7 +19,4 @@ data class BirdDatabaseModel(
 
     @ColumnInfo(name = "url")
     var imageUrl : String,
-) {
-
-
-}
+)
