@@ -24,7 +24,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.common.util.concurrent.ListenableFuture
 import hu.geribruu.project_birdtable.BirdApplication
 import hu.geribruu.project_birdtable.R
-import hu.geribruu.project_birdtable.camera.PhotoCaptureController
+import hu.geribruu.project_birdtable.camera.PhotoCapture
 import hu.geribruu.project_birdtable.camera.analyzer.ImageAnalyzer
 import hu.geribruu.project_birdtable.camera.objectdetector.CustomObjectDetector
 import hu.geribruu.project_birdtable.database.model.BirdDatabaseModel
@@ -42,6 +42,8 @@ class CameraFragment : Fragment() {
     private lateinit var cameraProviderFuture : ListenableFuture<ProcessCameraProvider>
 
     private var imageCapture: ImageCapture? = null
+
+    private lateinit var photoCapture : PhotoCapture
 
     private val cameraViewModel : CameraViewModel by viewModels {
         CameraViewModelFactory((activity?.application as BirdApplication).repository)
@@ -83,7 +85,7 @@ class CameraFragment : Fragment() {
         }
 
         btn_takePhoto_cameraFragment.setOnClickListener {
-            PhotoCaptureController(context, imageCapture).takePhoto()
+            PhotoCapture(context, imageCapture).takePhoto()
             cameraViewModel.insert(BirdDatabaseModel(0, "Madar", "Remelem mukodik", "Kerlek mukodj"))
         }
     }
@@ -142,6 +144,8 @@ class CameraFragment : Fragment() {
         imageCapture = ImageCapture.Builder()
                 .build()
 
+        photoCapture = PhotoCapture(context, imageCapture)
+
         val imageAnalysis = ImageAnalysis.Builder()
             .setTargetResolution(Size(1280, 720))
             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
@@ -149,7 +153,7 @@ class CameraFragment : Fragment() {
 
         val birdObjectDetector = CustomObjectDetector("bird_detection.tflite")
 
-        imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(context), ImageAnalyzer(binding, birdObjectDetector.objectDetector))
+        imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(context), ImageAnalyzer(binding, birdObjectDetector.objectDetector, photoCapture, cameraViewModel))
 
         cameraProvider.bindToLifecycle(this as LifecycleOwner, cameraSelector, preview, imageCapture, imageAnalysis)
     }

@@ -28,7 +28,6 @@ class GalleryFragment : Fragment() {
 
     private lateinit var adapter : GalleryListAdapter
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

@@ -7,14 +7,12 @@ import android.widget.Toast
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.FragmentActivity
 import hu.geribruu.project_birdtable.MainActivity
-import hu.geribruu.project_birdtable.R
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
-class PhotoCaptureController(
+class PhotoCapture (
         private var context: Context?,
         private var imageCapture: ImageCapture?
 ) {
@@ -23,17 +21,17 @@ class PhotoCaptureController(
 
     companion object {
         private const val TAG = "CameraXBasic"
-        private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
+        const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
     }
 
-    fun takePhoto() {
+    fun takePhoto() : String {
         // Get a stable reference of the modifiable image capture use case
-        val imageCapture = imageCapture ?: return
+        val imageCapture = imageCapture ?: return ""
 
         // Create time-stamped output file to hold the image
         val photoFile = File(
                 outputDirectory,
-                SimpleDateFormat(PhotoCaptureController.FILENAME_FORMAT, Locale.US
+                SimpleDateFormat(PhotoCapture.FILENAME_FORMAT, Locale.US
                 ).format(System.currentTimeMillis()) + ".jpg")
 
 
@@ -55,5 +53,7 @@ class PhotoCaptureController(
                 Log.d(TAG, msg)
             }
         })
+
+        return photoFile.absolutePath
     }
 }
