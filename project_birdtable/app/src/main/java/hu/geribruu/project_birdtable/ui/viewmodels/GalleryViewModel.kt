@@ -1,11 +1,14 @@
 package hu.geribruu.project_birdtable.ui.viewmodels
 
 import androidx.lifecycle.*
+import dagger.hilt.android.lifecycle.HiltViewModel
 import hu.geribruu.project_birdtable.database.model.BirdDatabaseModel
 import hu.geribruu.project_birdtable.database.BirdRepository
 import java.lang.IllegalArgumentException
+import javax.inject.Inject
 
-class GalleryViewModel(private val repository: BirdRepository) : ViewModel() {
+@HiltViewModel
+class GalleryViewModel @Inject constructor(private val repository: BirdRepository) : ViewModel() {
 
     val birds : LiveData<List<BirdDatabaseModel>> = repository.birds.asLiveData()
 }

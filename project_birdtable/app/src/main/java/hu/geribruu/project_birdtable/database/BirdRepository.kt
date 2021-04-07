@@ -3,14 +3,17 @@ package hu.geribruu.project_birdtable.database
 import androidx.annotation.WorkerThread
 import hu.geribruu.project_birdtable.database.model.BirdDatabaseModel
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class BirdRepository(private val birdDAO: BirdDAO) {
+@Singleton
+class BirdRepository @Inject constructor(private val birdDAO: BirdDAO) : IBirdRepository {
 
     val birds : Flow<List<BirdDatabaseModel>> = birdDAO.getAll()
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun insert(birdDatabaseModel: BirdDatabaseModel) {
+    override suspend fun insert(birdDatabaseModel: BirdDatabaseModel) {
         birdDAO.insert(birdDatabaseModel)
     }
 

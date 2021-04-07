@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import hu.geribruu.project_birdtable.BirdApplication
 import hu.geribruu.project_birdtable.R
 import hu.geribruu.project_birdtable.galery.adapter.GalleryListAdapter
@@ -20,11 +21,14 @@ import kotlinx.android.synthetic.main.fragment_galery.*
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
+@AndroidEntryPoint
 class GalleryFragment : Fragment() {
 
-    private val galleryViewModel : GalleryViewModel by viewModels {
+   /* private val galleryViewModel : GalleryViewModel by viewModels {
         GalleryViewModelFactory((activity?.application as BirdApplication).repository)
-    }
+    }*/
+
+    private val galleryViewModel : GalleryViewModel by viewModels()
 
     private lateinit var adapter : GalleryListAdapter
 

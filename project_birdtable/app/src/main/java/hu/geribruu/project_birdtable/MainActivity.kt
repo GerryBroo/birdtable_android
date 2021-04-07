@@ -2,8 +2,10 @@ package hu.geribruu.project_birdtable
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     companion object OutputFileUri {

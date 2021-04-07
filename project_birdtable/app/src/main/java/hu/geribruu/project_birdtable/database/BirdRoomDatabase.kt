@@ -14,7 +14,7 @@ abstract class BirdRoomDatabase : RoomDatabase() {
 
     abstract fun birdDAO() : BirdDAO
 
-    private class BirdDatabaseCallback (
+   /* private class BirdDatabaseCallback (
         private val scope : CoroutineScope ) : RoomDatabase.Callback() {
 
         override fun onCreate(db: SupportSQLiteDatabase) {
@@ -50,5 +50,5 @@ abstract class BirdRoomDatabase : RoomDatabase() {
                 instance
             }
         }
-    }
+    }*/
 }

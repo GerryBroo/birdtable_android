@@ -31,6 +31,7 @@ import hu.geribruu.project_birdtable.database.model.BirdDatabaseModel
 import hu.geribruu.project_birdtable.databinding.FragmentCameraBinding
 import hu.geribruu.project_birdtable.ui.viewmodels.CameraViewModel
 import hu.geribruu.project_birdtable.ui.viewmodels.CameraViewModelFactory
+import hu.geribruu.project_birdtable.ui.viewmodels.GalleryViewModel
 import kotlinx.android.synthetic.main.fragment_camera.*
 
 class CameraFragment : Fragment() {
@@ -45,9 +46,11 @@ class CameraFragment : Fragment() {
 
     private lateinit var photoCapture : PhotoCapture
 
-    private val cameraViewModel : CameraViewModel by viewModels {
+    /*private val cameraViewModel : CameraViewModel by viewModels {
         CameraViewModelFactory((activity?.application as BirdApplication).repository)
-    }
+    }*/
+
+    private val cameraViewModel : CameraViewModel by viewModels()
 
     companion object {
         private const val REQUEST_CODE_PERMISSIONS = 10
@@ -86,7 +89,7 @@ class CameraFragment : Fragment() {
 
         btn_takePhoto_cameraFragment.setOnClickListener {
             PhotoCapture(context, imageCapture).takePhoto()
-            cameraViewModel.insert(BirdDatabaseModel(0, "Madar", "Remelem mukodik", "Kerlek mukodj"))
+            //cameraViewModel.insert(BirdDatabaseModel(0, "Madar", "Remelem mukodik", "Kerlek mukodj"))
         }
     }
 
@@ -153,7 +156,7 @@ class CameraFragment : Fragment() {
 
         val birdObjectDetector = CustomObjectDetector("bird_detection.tflite")
 
-        imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(context), ImageAnalyzer(binding, birdObjectDetector.objectDetector, photoCapture, cameraViewModel))
+        imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(context), ImageAnalyzer(binding, birdObjectDetector.objectDetector, photoCapture /*cameraViewModel*/))
 
         cameraProvider.bindToLifecycle(this as LifecycleOwner, cameraSelector, preview, imageCapture, imageAnalysis)
     }
