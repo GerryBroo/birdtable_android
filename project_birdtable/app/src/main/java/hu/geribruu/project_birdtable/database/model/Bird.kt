@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "bird")
-data class BirdDatabaseModel(
+data class Bird(
 
     @ColumnInfo(name = "id")
     @PrimaryKey(autoGenerate = true)

@@ -1,15 +1,10 @@
 package hu.geribruu.project_birdtable.database
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
-import hu.geribruu.project_birdtable.database.model.BirdDatabaseModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
+import hu.geribruu.project_birdtable.database.model.Bird
 
-@Database(entities = arrayOf(BirdDatabaseModel::class), version = 1)
+@Database(entities = arrayOf(Bird::class), version = 1, exportSchema = false)
 abstract class BirdRoomDatabase : RoomDatabase() {
 
     abstract fun birdDAO() : BirdDAO

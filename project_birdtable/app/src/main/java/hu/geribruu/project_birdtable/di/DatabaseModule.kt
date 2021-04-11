@@ -9,6 +9,8 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import hu.geribruu.project_birdtable.database.BirdDAO
 import hu.geribruu.project_birdtable.database.BirdRoomDatabase
+import hu.geribruu.project_birdtable.repository.BirdRepositoryImpl
+import hu.geribruu.project_birdtable.repository.IBirdRepository
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
@@ -21,12 +23,19 @@ object DatabaseModule {
         return Room.databaseBuilder(
             appContext,
             BirdRoomDatabase::class.java,
-            "bird.db"
+            "bird"
         ).build()
     }
 
     @Provides
     fun provideCharacterDao(database: BirdRoomDatabase): BirdDAO {
         return database.birdDAO()
+    }
+
+
+    @Provides
+    @Singleton
+    fun provideRepository(birdDao : BirdDAO): BirdRepositoryImpl {
+        return BirdRepositoryImpl(birdDao)
     }
 }

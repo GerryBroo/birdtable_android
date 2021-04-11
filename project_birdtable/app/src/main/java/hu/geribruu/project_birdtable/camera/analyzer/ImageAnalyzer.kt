@@ -2,20 +2,15 @@ package hu.geribruu.project_birdtable.camera.analyzer
 
 import android.annotation.SuppressLint
 import android.util.Log
-import androidx.camera.core.Camera
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
-import androidx.lifecycle.viewModelScope
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.objects.ObjectDetector
 import hu.geribruu.project_birdtable.camera.PhotoCapture
-import hu.geribruu.project_birdtable.database.BirdRepository
-import hu.geribruu.project_birdtable.database.IBirdRepository
-import hu.geribruu.project_birdtable.database.model.BirdDatabaseModel
+import hu.geribruu.project_birdtable.database.model.Bird
 import hu.geribruu.project_birdtable.databinding.FragmentCameraBinding
+import hu.geribruu.project_birdtable.repository.BirdRepositoryImpl
 import hu.geribruu.project_birdtable.ui.viewmodels.CameraViewModel
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -26,10 +21,11 @@ class ImageAnalyzer(
     private var binding: FragmentCameraBinding,
     private val objectDetector : ObjectDetector,
     private val photoCapture: PhotoCapture,
-    /*private val cameraVM : CameraViewModel*/
+   /* private val cameraVM : CameraViewModel*/
 ) : ImageAnalysis.Analyzer {
 
-    @Inject lateinit var repository: IBirdRepository
+    @Inject
+    lateinit var repository: BirdRepositoryImpl
 
     @SuppressLint("UnsafeExperimentalUsageError")
     override fun analyze(imageProxy: ImageProxy) {
@@ -52,9 +48,11 @@ class ImageAnalyzer(
 
                         binding.tvCameraFragment.text = name
 
-                        GlobalScope.launch {
-                            repository.insert(BirdDatabaseModel(0, name, date, url))
+                       GlobalScope.launch {
+                            repository.insert(Bird(0, name, date, url))
                         }
+
+                        //cameraVM.insert(Bird(0, name, date, url))
 
                     }
                 }

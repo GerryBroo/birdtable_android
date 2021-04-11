@@ -10,11 +10,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import de.hdodenhof.circleimageview.CircleImageView
 import hu.geribruu.project_birdtable.R
-import hu.geribruu.project_birdtable.database.model.BirdDatabaseModel
+import hu.geribruu.project_birdtable.database.model.Bird
 import kotlinx.android.synthetic.main.layout_galery_listitem.view.*
 import java.io.File
 
-class GalleryListAdapter : ListAdapter<BirdDatabaseModel, GalleryListAdapter.GalleryViewHolder>(BIRDS_COMPARATOR) {
+class GalleryListAdapter : ListAdapter<Bird, GalleryListAdapter.GalleryViewHolder>(BIRDS_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GalleryViewHolder {
         return GalleryViewHolder.create(parent)
@@ -31,7 +31,7 @@ class GalleryListAdapter : ListAdapter<BirdDatabaseModel, GalleryListAdapter.Gal
         private val tvBirdUrl : TextView = itemView.tv_url_galery_item
         private val imgBird : CircleImageView = itemView.img_galery_item
 
-        fun bind(bird: BirdDatabaseModel) {
+        fun bind(bird: Bird) {
             tvBirdName.text = bird.name
             tvBirdCaptureDate.text = bird.captureDate
             tvBirdUrl.text = bird.imageUrl
@@ -53,12 +53,12 @@ class GalleryListAdapter : ListAdapter<BirdDatabaseModel, GalleryListAdapter.Gal
     }
 
     companion object {
-        private val BIRDS_COMPARATOR = object : DiffUtil.ItemCallback<BirdDatabaseModel>() {
-            override fun areItemsTheSame(oldItem: BirdDatabaseModel, newItem: BirdDatabaseModel): Boolean {
+        private val BIRDS_COMPARATOR = object : DiffUtil.ItemCallback<Bird>() {
+            override fun areItemsTheSame(oldItem: Bird, newItem: Bird): Boolean {
                 return oldItem === newItem
             }
 
-            override fun areContentsTheSame(oldItem: BirdDatabaseModel, newItem: BirdDatabaseModel): Boolean {
+            override fun areContentsTheSame(oldItem: Bird, newItem: Bird): Boolean {
                 return oldItem.name == newItem.name
             }
         }
