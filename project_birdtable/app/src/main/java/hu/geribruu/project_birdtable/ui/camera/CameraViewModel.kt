@@ -1,4 +1,4 @@
-package hu.geribruu.project_birdtable.ui.viewmodels
+package hu.geribruu.project_birdtable.ui.camera
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hu.geribruu.project_birdtable.database.model.Bird
 import hu.geribruu.project_birdtable.repository.BirdRepositoryImpl
-import hu.geribruu.project_birdtable.repository.IBirdRepository
 import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 import javax.inject.Inject

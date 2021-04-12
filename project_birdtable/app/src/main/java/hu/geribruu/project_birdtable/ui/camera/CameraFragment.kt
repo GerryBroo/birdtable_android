@@ -1,4 +1,4 @@
-package hu.geribruu.project_birdtable.ui
+package hu.geribruu.project_birdtable.ui.camera
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -28,7 +28,6 @@ import hu.geribruu.project_birdtable.camera.PhotoCapture
 import hu.geribruu.project_birdtable.camera.analyzer.ImageAnalyzer
 import hu.geribruu.project_birdtable.camera.objectdetector.CustomObjectDetector
 import hu.geribruu.project_birdtable.databinding.FragmentCameraBinding
-import hu.geribruu.project_birdtable.ui.viewmodels.CameraViewModel
 import kotlinx.android.synthetic.main.fragment_camera.*
 
 @AndroidEntryPoint
@@ -43,11 +42,6 @@ class CameraFragment : Fragment() {
     private var imageCapture: ImageCapture? = null
 
     private lateinit var photoCapture : PhotoCapture
-
-
-    /*private val cameraViewModel : CameraViewModel by viewModels {
-        CameraViewModelFactory((activity?.application as BirdApplication).repository)
-    }*/
 
     private val cameraViewModel : CameraViewModel by viewModels()
 

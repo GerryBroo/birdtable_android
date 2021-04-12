@@ -1,7 +1,7 @@
 package hu.geribruu.project_birdtable.camera
 
 import hu.geribruu.project_birdtable.database.model.Bird
-import hu.geribruu.project_birdtable.ui.viewmodels.CameraViewModel
+import hu.geribruu.project_birdtable.ui.camera.CameraViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 

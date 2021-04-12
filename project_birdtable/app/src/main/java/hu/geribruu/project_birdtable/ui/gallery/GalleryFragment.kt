@@ -1,4 +1,4 @@
-package hu.geribruu.project_birdtable.ui
+package hu.geribruu.project_birdtable.ui.gallery
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,11 +11,9 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
-import hu.geribruu.project_birdtable.BirdApplication
 import hu.geribruu.project_birdtable.R
-import hu.geribruu.project_birdtable.galery.adapter.GalleryListAdapter
+import hu.geribruu.project_birdtable.ui.gallery.adapter.GalleryListAdapter
 import hu.geribruu.project_birdtable.ui.viewmodels.GalleryViewModel
-import hu.geribruu.project_birdtable.ui.viewmodels.GalleryViewModelFactory
 import kotlinx.android.synthetic.main.fragment_galery.*
 
 /**

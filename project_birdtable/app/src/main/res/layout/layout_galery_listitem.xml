@@ -21,7 +21,7 @@
         android:textColor="#FFF"
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
-        android:textSize="10sp">
+        android:textSize="15sp">
     </TextView>
 
     <TextView
@@ -30,18 +30,6 @@
         android:layout_height="wrap_content"
         android:text="2000.20.20"
         android:layout_toRightOf="@+id/tv_name_galery_item"
-        android:textColor="#FFF"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp"
-        android:textSize="10sp">
-    </TextView>
-
-    <TextView
-        android:id="@+id/tv_url_galery_item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Bird"
-        android:layout_toRightOf="@+id/tv_date_galery_item"
         android:textColor="#FFF"
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"

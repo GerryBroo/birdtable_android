@@ -1,4 +1,4 @@
-package hu.geribruu.project_birdtable.galery.adapter
+package hu.geribruu.project_birdtable.ui.gallery.adapter
 
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
@@ -28,13 +28,11 @@ class GalleryListAdapter : ListAdapter<Bird, GalleryListAdapter.GalleryViewHolde
     class GalleryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val tvBirdName : TextView = itemView.tv_name_galery_item
         private val tvBirdCaptureDate : TextView = itemView.tv_date_galery_item
-        private val tvBirdUrl : TextView = itemView.tv_url_galery_item
         private val imgBird : CircleImageView = itemView.img_galery_item
 
         fun bind(bird: Bird) {
             tvBirdName.text = bird.name
             tvBirdCaptureDate.text = bird.captureDate
-            tvBirdUrl.text = bird.imageUrl
 
             val imgFile = File(bird.imageUrl)
             if (imgFile.exists()) {
