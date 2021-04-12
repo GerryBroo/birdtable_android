@@ -2,12 +2,14 @@ package hu.geribruu.project_birdtable.camera.objectdetector
 
 import com.google.mlkit.common.model.LocalModel
 import com.google.mlkit.vision.objects.ObjectDetection
+import com.google.mlkit.vision.objects.ObjectDetector
 import com.google.mlkit.vision.objects.custom.CustomObjectDetectorOptions
+import javax.inject.Inject
 
-class CustomObjectDetector(tflite : String) {
+class CustomObjectDetector(string : String) {
 
     private val localModel : LocalModel = LocalModel.Builder()
-            .setAssetFilePath(tflite)
+            .setAssetFilePath(string)
             .build()
         get() = field
 
@@ -19,5 +21,4 @@ class CustomObjectDetector(tflite : String) {
             .build()
 
    val objectDetector = ObjectDetection.getClient(customObjectDetectorOption)
-
 }

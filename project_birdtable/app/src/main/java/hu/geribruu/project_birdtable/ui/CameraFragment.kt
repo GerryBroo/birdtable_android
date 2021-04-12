@@ -22,6 +22,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.common.util.concurrent.ListenableFuture
+import dagger.hilt.android.AndroidEntryPoint
 import hu.geribruu.project_birdtable.R
 import hu.geribruu.project_birdtable.camera.PhotoCapture
 import hu.geribruu.project_birdtable.camera.analyzer.ImageAnalyzer
@@ -30,6 +31,7 @@ import hu.geribruu.project_birdtable.databinding.FragmentCameraBinding
 import hu.geribruu.project_birdtable.ui.viewmodels.CameraViewModel
 import kotlinx.android.synthetic.main.fragment_camera.*
 
+@AndroidEntryPoint
 class CameraFragment : Fragment() {
 
     /** Binding */
@@ -41,6 +43,7 @@ class CameraFragment : Fragment() {
     private var imageCapture: ImageCapture? = null
 
     private lateinit var photoCapture : PhotoCapture
+
 
     /*private val cameraViewModel : CameraViewModel by viewModels {
         CameraViewModelFactory((activity?.application as BirdApplication).repository)
@@ -152,7 +155,7 @@ class CameraFragment : Fragment() {
 
         val birdObjectDetector = CustomObjectDetector("bird_detection.tflite")
 
-        imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(context), ImageAnalyzer(binding, birdObjectDetector.objectDetector, photoCapture/*, cameraViewModel*/))
+        imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(context), ImageAnalyzer(binding, birdObjectDetector.objectDetector, photoCapture, cameraViewModel))
 
         cameraProvider.bindToLifecycle(this as LifecycleOwner, cameraSelector, preview, imageCapture, imageAnalysis)
     }
