@@ -1,4 +1,4 @@
-package hu.geribruu.project_birdtable.ui
+package hu.geribruu.project_birdtable.ui.gallery
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,22 +10,15 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import hu.geribruu.project_birdtable.BirdApplication
+import dagger.hilt.android.AndroidEntryPoint
 import hu.geribruu.project_birdtable.R
-import hu.geribruu.project_birdtable.galery.adapter.GalleryListAdapter
-import hu.geribruu.project_birdtable.ui.viewmodels.GalleryViewModel
-import hu.geribruu.project_birdtable.ui.viewmodels.GalleryViewModelFactory
+import hu.geribruu.project_birdtable.ui.gallery.adapter.GalleryListAdapter
 import kotlinx.android.synthetic.main.fragment_galery.*
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
+@AndroidEntryPoint
 class GalleryFragment : Fragment() {
 
-    private val galleryViewModel : GalleryViewModel by viewModels {
-        GalleryViewModelFactory((activity?.application as BirdApplication).repository)
-    }
-
+    private val galleryViewModel : GalleryViewModel by viewModels()
     private lateinit var adapter : GalleryListAdapter
 
     override fun onCreateView(
@@ -33,7 +26,6 @@ class GalleryFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         return inflater.inflate(R.layout.fragment_galery, container, false)
     }
 
@@ -58,15 +50,4 @@ class GalleryFragment : Fragment() {
             } )
         }
     }
-
-    /*  private fun initBirds() {
-          val directory: File = File(MainActivity.outputFileUri)
-          val files = directory.listFiles()
-          Log.d("Files", "Size: " + files.size)
-          for (i in files.indices) {
-              Log.d("Files", "FileName:" + files[i].name)
-
-              birdDatabase.birdDAO().insert(BirdDatabaseModel(galeryRecyclerViewAdapter.itemCount.toLong() + 1,"Sasmadár", files[i].name, files[i].absolutePath))
-          }
-      }*/
 }

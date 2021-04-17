@@ -1,9 +1,11 @@
-package hu.geribruu.project_birdtable.ui
+package hu.geribruu.project_birdtable.ui.camera
 
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
+import android.media.Image
 import android.os.Bundle
+import android.util.Log
 import android.util.Size
 import android.view.LayoutInflater
 import android.view.View
@@ -19,35 +21,31 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.common.util.concurrent.ListenableFuture
-import hu.geribruu.project_birdtable.BirdApplication
+import com.google.mlkit.vision.objects.ObjectDetector
+import dagger.hilt.android.AndroidEntryPoint
 import hu.geribruu.project_birdtable.R
-import hu.geribruu.project_birdtable.camera.PhotoCapture
+import hu.geribruu.project_birdtable.camera.CaptureManager
 import hu.geribruu.project_birdtable.camera.analyzer.ImageAnalyzer
-import hu.geribruu.project_birdtable.camera.objectdetector.CustomObjectDetector
-import hu.geribruu.project_birdtable.database.model.BirdDatabaseModel
 import hu.geribruu.project_birdtable.databinding.FragmentCameraBinding
-import hu.geribruu.project_birdtable.ui.viewmodels.CameraViewModel
-import hu.geribruu.project_birdtable.ui.viewmodels.CameraViewModelFactory
-import kotlinx.android.synthetic.main.fragment_camera.*
+import javax.inject.Inject
 
-class CameraFragment : Fragment() {
+@AndroidEntryPoint
+class CameraFragment : Fragment(){
 
     /** Binding */
     private var _binding : FragmentCameraBinding? = null
     private val binding get() = _binding!!
 
+    private val viewModel : CameraViewModel by viewModels()
+
     private lateinit var cameraProviderFuture : ListenableFuture<ProcessCameraProvider>
 
-    private var imageCapture: ImageCapture? = null
-
-    private lateinit var photoCapture : PhotoCapture
-
-    private val cameraViewModel : CameraViewModel by viewModels {
-        CameraViewModelFactory((activity?.application as BirdApplication).repository)
-    }
+    @Inject lateinit var imageAnalyzer: ImageAnalyzer
+    @Inject lateinit var imageCapture: ImageCapture
 
     companion object {
         private const val REQUEST_CODE_PERMISSIONS = 10
@@ -71,10 +69,7 @@ class CameraFragment : Fragment() {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_camera, container, false)
         _binding = FragmentCameraBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
@@ -83,16 +78,6 @@ class CameraFragment : Fragment() {
         view.findViewById<FloatingActionButton>(R.id.fab_cameraFragment).setOnClickListener {
             findNavController().navigate(R.id.action_CameraFragment_to_GaleryFragment)
         }
-
-        btn_takePhoto_cameraFragment.setOnClickListener {
-            PhotoCapture(context, imageCapture).takePhoto()
-            cameraViewModel.insert(BirdDatabaseModel(0, "Madar", "Remelem mukodik", "Kerlek mukodj"))
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     /** Permissions Request */
@@ -118,8 +103,10 @@ class CameraFragment : Fragment() {
         } == PackageManager.PERMISSION_GRANTED
     }
 
-    /** cameraX */
+    /** cameraX **/
     private fun startCamera() {
+        Log.d("TAG", "START CAMERA")
+
         cameraProviderFuture = context?.let { ProcessCameraProvider.getInstance(it) } as ListenableFuture<ProcessCameraProvider>
 
         cameraProviderFuture.addListener({
@@ -141,20 +128,25 @@ class CameraFragment : Fragment() {
 
         preview.setSurfaceProvider(binding.previewView.surfaceProvider)
 
-        imageCapture = ImageCapture.Builder()
-                .build()
-
-        photoCapture = PhotoCapture(context, imageCapture)
-
         val imageAnalysis = ImageAnalysis.Builder()
             .setTargetResolution(Size(1280, 720))
             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
             .build()
 
-        val birdObjectDetector = CustomObjectDetector("bird_detection.tflite")
-
-        imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(context), ImageAnalyzer(binding, birdObjectDetector.objectDetector, photoCapture, cameraViewModel))
+        imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(context), imageAnalyzer)
 
         cameraProvider.bindToLifecycle(this as LifecycleOwner, cameraSelector, preview, imageCapture, imageAnalysis)
     }
+
+    override fun onStop() {
+        super.onStop()
+        cameraProviderFuture.get().unbindAll()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+
 }

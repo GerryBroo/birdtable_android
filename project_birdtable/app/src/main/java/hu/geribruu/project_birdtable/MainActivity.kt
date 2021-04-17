@@ -2,8 +2,10 @@ package hu.geribruu.project_birdtable
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     companion object OutputFileUri {
@@ -18,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         outputFileUri = getOutputDirectory()
     }
 
-    private fun getOutputDirectory(): String {
+    fun getOutputDirectory(): String {
 
         val mediaDir = externalMediaDirs?.firstOrNull().let {
             File(it, resources.getString(R.string.app_name)).apply { mkdirs() } }

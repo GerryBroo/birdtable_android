@@ -17,7 +17,7 @@ class PhotoCapture (
         private var imageCapture: ImageCapture?
 ) {
 
-    private var outputDirectory: File = File(MainActivity.outputFileUri)
+    private var outputDirectory: File? = null
 
     companion object {
         private const val TAG = "CameraXBasic"
@@ -25,6 +25,9 @@ class PhotoCapture (
     }
 
     fun takePhoto() : String {
+
+        outputDirectory = File(MainActivity.outputFileUri)
+
         // Get a stable reference of the modifiable image capture use case
         val imageCapture = imageCapture ?: return ""
 
