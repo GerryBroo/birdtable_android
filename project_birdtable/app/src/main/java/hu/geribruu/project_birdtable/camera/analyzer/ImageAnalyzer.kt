@@ -6,19 +6,19 @@ import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.objects.ObjectDetector
+import dagger.hilt.android.AndroidEntryPoint
 import hu.geribruu.project_birdtable.camera.CaptureManager
 import hu.geribruu.project_birdtable.camera.PhotoCapture
 import hu.geribruu.project_birdtable.databinding.FragmentCameraBinding
+import hu.geribruu.project_birdtable.repository.BirdRepositoryImpl
 import hu.geribruu.project_birdtable.ui.camera.CameraViewModel
+import javax.inject.Inject
 
-class ImageAnalyzer(
+class ImageAnalyzer @Inject constructor(
         private var binding: FragmentCameraBinding,
         private val objectDetector : ObjectDetector,
-        private val photoCapture: PhotoCapture,
-        private val cameraVM : CameraViewModel
+        private val captureManager : CaptureManager
 ) : ImageAnalysis.Analyzer {
-
-    private val captureManager : CaptureManager = CaptureManager(photoCapture, cameraVM)
 
     @SuppressLint("UnsafeExperimentalUsageError")
     override fun analyze(imageProxy: ImageProxy) {

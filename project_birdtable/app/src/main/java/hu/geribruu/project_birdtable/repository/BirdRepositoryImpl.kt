@@ -1,7 +1,6 @@
 package hu.geribruu.project_birdtable.repository
 
 import androidx.annotation.WorkerThread
-import androidx.lifecycle.LiveData
 import hu.geribruu.project_birdtable.database.BirdDAO
 import hu.geribruu.project_birdtable.database.model.Bird
 import kotlinx.coroutines.flow.Flow

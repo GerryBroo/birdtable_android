@@ -1,14 +1,18 @@
 package hu.geribruu.project_birdtable.camera
 
+import dagger.hilt.android.AndroidEntryPoint
 import hu.geribruu.project_birdtable.database.model.Bird
+import hu.geribruu.project_birdtable.repository.BirdRepositoryImpl
 import hu.geribruu.project_birdtable.ui.camera.CameraViewModel
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
-
-class CaptureManager(
+class CaptureManager @Inject constructor(
         private val photoCapture: PhotoCapture,
-        private val viewModel: CameraViewModel
+        private val repositoryImpl: BirdRepositoryImpl
 ) {
 
     private var timer : Timer = Timer()
@@ -36,7 +40,9 @@ class CaptureManager(
             val date = SimpleDateFormat(PhotoCapture.FILENAME_FORMAT, Locale.US).format(System.currentTimeMillis())
             val url = photoCapture.takePhoto()
 
-            viewModel.insert(Bird(0, name, date, url))
+            GlobalScope.launch {
+                repositoryImpl.insert(Bird(0, name, date, url))
+            }
 
             isCapture = false
         }

@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         outputFileUri = getOutputDirectory()
     }
 
-    private fun getOutputDirectory(): String {
+    fun getOutputDirectory(): String {
 
         val mediaDir = externalMediaDirs?.firstOrNull().let {
             File(it, resources.getString(R.string.app_name)).apply { mkdirs() } }
