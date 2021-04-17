@@ -13,9 +13,9 @@ import hu.geribruu.project_birdtable.databinding.FragmentCameraBinding
 import hu.geribruu.project_birdtable.repository.BirdRepositoryImpl
 import hu.geribruu.project_birdtable.ui.camera.CameraViewModel
 import javax.inject.Inject
+import javax.security.auth.callback.Callback
 
 class ImageAnalyzer @Inject constructor(
-        private var binding: FragmentCameraBinding,
         private val objectDetector : ObjectDetector,
         private val captureManager : CaptureManager
 ) : ImageAnalysis.Analyzer {
@@ -36,8 +36,7 @@ class ImageAnalyzer @Inject constructor(
                     for (detectedObject in objects) {
                         val name = detectedObject.labels.firstOrNull()?.text ?: "Undefined"
 
-                        binding.tvCameraFragment.text = name
-
+                        //binding.tvCameraFragment.text = name
                         captureManager.manageCapture(name)
                     }
                 }
