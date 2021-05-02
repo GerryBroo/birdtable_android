@@ -1,5 +1,6 @@
 package hu.geribruu.project_birdtable.database
 
+import androidx.lifecycle.MutableLiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -11,6 +12,9 @@ interface BirdDAO {
 
     @Query(value = "SELECT * FROM bird")
     fun getAll() : Flow<List<Bird>>
+
+    @Query("SELECT * FROM bird WHERE id=:id")
+    fun getBird(id: Long) : Flow<Bird>
 
     @Insert
     suspend fun insert(bird : Bird)

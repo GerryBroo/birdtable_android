@@ -16,12 +16,14 @@ import java.io.File
 
 class GalleryListAdapter(private val onClick : BirdClickListener) : ListAdapter<Bird, GalleryListAdapter.GalleryViewHolder>(BIRDS_COMPARATOR) {
 
+    private lateinit var current : Bird
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GalleryViewHolder {
         return GalleryViewHolder.create(parent, onClick)
     }
 
     override fun onBindViewHolder(holder: GalleryViewHolder, position: Int) {
-        val current = getItem(position)
+        current = getItem(position)
         holder.bind(current, position)
     }
 
@@ -29,16 +31,6 @@ class GalleryListAdapter(private val onClick : BirdClickListener) : ListAdapter<
         private val tvBirdName : TextView = itemView.tv_name_galery_item
         private val tvBirdCaptureDate : TextView = itemView.tv_date_galery_item
         private val imgBird : CircleImageView = itemView.img_galery_item
-
-        private var currentBird : Bird? = null
-
-       /* init {
-            itemView.setOnClickListener {
-                currentBird?.let {
-                    onClick(it)
-                }
-            }
-        }*/
 
         fun bind(bird: Bird, position: Int) {
             tvBirdName.text = bird.name
@@ -51,7 +43,7 @@ class GalleryListAdapter(private val onClick : BirdClickListener) : ListAdapter<
             }
 
             itemView.setOnClickListener {
-                onClick.onClick(bird, position)
+                onClick.onClick(bird.id)
             }
         }
 
@@ -77,6 +69,6 @@ class GalleryListAdapter(private val onClick : BirdClickListener) : ListAdapter<
     }
 
     interface BirdClickListener {
-        fun onClick(item: Bird, position: Int)
+        fun onClick(id: Long)
     }
 }

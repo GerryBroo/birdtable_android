@@ -1,6 +1,5 @@
 package hu.geribruu.project_birdtable.ui.gallery
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,16 +12,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import hu.geribruu.project_birdtable.R
-import hu.geribruu.project_birdtable.database.model.Bird
-import hu.geribruu.project_birdtable.ui.detail.BirdDetailActivity
-import hu.geribruu.project_birdtable.ui.detail.BirdDetailFragment
+import hu.geribruu.project_birdtable.navigator.AppNavigator
 import hu.geribruu.project_birdtable.ui.gallery.adapter.GalleryListAdapter
-import hu.geribruu.project_birdtable.ui.detail.BirdDetailViewModel.Companion.BIRD_ID
 import kotlinx.android.synthetic.main.fragment_galery.*
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class GalleryFragment : Fragment(), GalleryListAdapter.BirdClickListener {
 
+    @Inject lateinit var navigator: AppNavigator
     private val galleryViewModel : GalleryViewModel by viewModels()
     private lateinit var adapter : GalleryListAdapter
 
@@ -56,15 +54,8 @@ class GalleryFragment : Fragment(), GalleryListAdapter.BirdClickListener {
         }
     }
 
-    override fun onClick(bird: Bird, position: Int) {
-       /* val intent = Intent(context, BirdDetailActivity()::class.java)
-        intent.putExtra(Bird_ID, bird.id)
-        context?.startActivity(intent)*/
 
-        startActivity(
-            Intent(context, BirdDetailActivity()::class.java).apply {
-                putExtra(BIRD_ID, bird.name)
-            }
-        )
+    override fun onClick(id: Long) {
+        navigator.navigateToBirdDetail(id)
     }
 }
