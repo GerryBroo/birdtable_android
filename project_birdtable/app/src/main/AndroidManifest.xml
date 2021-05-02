@@ -3,8 +3,8 @@
     package="hu.geribruu.project_birdtable">
 
     <uses-feature android:name="android.hardware.camera.any" />
-    <uses-permission android:name="android.permission.CAMERA" />
 
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -15,6 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Project_birdtable">
+        <activity android:name=".ui.detail.BirdDetailActivity"></activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"

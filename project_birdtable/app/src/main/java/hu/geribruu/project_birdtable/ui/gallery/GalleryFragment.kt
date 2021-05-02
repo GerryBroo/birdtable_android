@@ -12,12 +12,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import hu.geribruu.project_birdtable.R
+import hu.geribruu.project_birdtable.navigator.AppNavigator
 import hu.geribruu.project_birdtable.ui.gallery.adapter.GalleryListAdapter
 import kotlinx.android.synthetic.main.fragment_galery.*
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class GalleryFragment : Fragment() {
+class GalleryFragment : Fragment(), GalleryListAdapter.BirdClickListener {
 
+    @Inject lateinit var navigator: AppNavigator
     private val galleryViewModel : GalleryViewModel by viewModels()
     private lateinit var adapter : GalleryListAdapter
 
@@ -40,7 +43,7 @@ class GalleryFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = GalleryListAdapter()
+        adapter = GalleryListAdapter(this)
         recyclerview_galery.adapter = adapter
         recyclerview_galery.layoutManager = LinearLayoutManager(context)
 
@@ -49,5 +52,10 @@ class GalleryFragment : Fragment() {
                 birds.let { adapter.submitList(it) }
             } )
         }
+    }
+
+
+    override fun onClick(id: Long) {
+        navigator.navigateToBirdDetail(id)
     }
 }

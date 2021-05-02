@@ -52,3 +52,17 @@ Sikeresen implementáltam a galéria recyclerview-t. Egyenlőre az android kép�
 sikeresen kiegészítettem a galériát a képek beolvasásával. Eléri a képeket és a nevűket is.
 <br>Először arra gondoltam, hogy leegyszerűsítve a feladatot a képeket úgy mentem el, hogy már tartalmazza a madár nevét, a kép idejét így egyszerűen be tudom olvasni és kiírni, de szeretnék tanulni egy kis adatbázist, ezért mindent egy adatbázisba fogok elmenti, az url-t is egy string-ként, így az adatbázisól kiolvasva az elérési útvonalat a program megtalálja a képet.
 <br>Erre a feladatra Room-ot szeretnék használni, mivel azt már használtam, így van egy kis fogalmam róla.
+
+## 7.hét - 03.24. - 03.30.
+
+Megvalósítottam a ROOM adatbázist. Létrehoztam a hozzá szükséges osztálykat. Továbbikaban elkezdtem fogalkozni a madarak végső detektálásával, kép készítésével és az adaatbázisba való elmentésével.
+
+## 8 - 9.hét - 03.31. - 04.13.
+
+Az elmúlt 2 hétben a HILT megismerése volt a célom. A hét folyam tanulmányoztam a Hilt Dagger kapcsolatát és megvizsgáltam, hogyan valósítható meg MVVM-ben. Sok probálkozás után sikerült megvalósítani a megfelelő @Inject-álásokat az MVVM architektúrába.
+
+## 10.hét - 04.14. - 04.20.
+
+A hét első felében tovább probálkoztam a Hilt-el. Nagyon zavart, hogy azért adok át osztályoknak objektumokat, hogy ők továbbadják egy másiknak, ezért ígyekeztem ehhez is beveztni a Hilt rendszerét. Végül sikerült @Inject-álni mindent, ahogy szeretem volna.
+<br> 
+<br> Következőkben egy újabb Activity-t hoztam létre BirdDetail névem, amely a madár részletes adatainak kirajzolásáért felel. Egyenlőre intent-el próbálkozok adatot átküldeni, de egyenlőre nem sikerült.
