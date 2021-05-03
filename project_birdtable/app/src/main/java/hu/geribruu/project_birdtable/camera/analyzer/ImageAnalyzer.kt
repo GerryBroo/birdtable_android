@@ -20,6 +20,9 @@ class ImageAnalyzer @Inject constructor(
         private val captureManager : CaptureManager
 ) : ImageAnalysis.Analyzer {
 
+    var isTakePhoto : Boolean = true
+    var birdName : String = "Detection..."
+
     @SuppressLint("UnsafeExperimentalUsageError")
     override fun analyze(imageProxy: ImageProxy) {
 
@@ -36,8 +39,10 @@ class ImageAnalyzer @Inject constructor(
                     for (detectedObject in objects) {
                         val name = detectedObject.labels.firstOrNull()?.text ?: "Undefined"
 
-                        //binding.tvCameraFragment.text = name
-                        captureManager.manageCapture(name)
+                        birdName = name
+                        if(isTakePhoto) {
+                            captureManager.manageCapture(name)
+                        }
                     }
                 }
                 .addOnFailureListener {

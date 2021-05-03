@@ -1,6 +1,5 @@
 package hu.geribruu.project_birdtable.di
 
-import android.app.Activity
 import android.content.Context
 import androidx.camera.core.ImageCapture
 import com.google.mlkit.vision.objects.ObjectDetector

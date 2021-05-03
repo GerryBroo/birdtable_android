@@ -15,16 +15,26 @@
             android:layout_height="match_parent" />
 
         <TextView
-            android:id="@+id/tv_cameraFragment"
+            android:id="@+id/textView_cameraFragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="@dimen/fab_margin"
-            android:layout_marginBottom="64dp"
+            android:layout_marginBottom="75dp"
             android:text="@string/detecting"
             android:textColor="#F44336"
             android:textSize="24sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttom_detection_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="64dp"
+            android:text="@string/photo_on"
+            android:textSize="16sp"/>
 
     </RelativeLayout>
 </layout>

@@ -31,6 +31,7 @@ import hu.geribruu.project_birdtable.R
 import hu.geribruu.project_birdtable.camera.CaptureManager
 import hu.geribruu.project_birdtable.camera.analyzer.ImageAnalyzer
 import hu.geribruu.project_birdtable.databinding.FragmentCameraBinding
+import kotlinx.android.synthetic.main.fragment_camera.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -40,9 +41,8 @@ class CameraFragment : Fragment(){
     private var _binding : FragmentCameraBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel : CameraViewModel by viewModels()
-
     private lateinit var cameraProviderFuture : ListenableFuture<ProcessCameraProvider>
+    private val viewModel : CameraViewModel by viewModels()
 
     @Inject lateinit var imageAnalyzer: ImageAnalyzer
     @Inject lateinit var imageCapture: ImageCapture
@@ -70,11 +70,35 @@ class CameraFragment : Fragment(){
             savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCameraBinding.inflate(inflater, container, false)
+
+        viewModel.birdNameLiveData.observe(viewLifecycleOwner, { name ->
+            textView_cameraFragment.text = name
+        })
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        buttom_detection_switch.setOnClickListener {
+            imageAnalyzer.isTakePhoto = !imageAnalyzer.isTakePhoto
+            if(imageAnalyzer.isTakePhoto) {
+                buttom_detection_switch.text = "Photo On"
+            }
+            else {
+                buttom_detection_switch.text = "Photo Off"
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(imageAnalyzer.isTakePhoto) {
+            buttom_detection_switch.text = "Photo On"
+        }
+        else {
+            buttom_detection_switch.text = "Photo Off"
+        }
     }
 
     /** Permissions Request */

@@ -14,4 +14,6 @@
     <string name="bird_gallery">Bird Gallery</string>
     <string name="bird_detection">Bird Detection</string>
     <string name="detecting">Detecting...</string>
+    <string name="photo_on">Photo On</string>
+    <string name="photo_off">Photo off</string>
 </resources>
