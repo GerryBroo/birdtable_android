@@ -66,3 +66,11 @@ Az elmúlt 2 hétben a HILT megismerése volt a célom. A hét folyam tanulmány
 A hét első felében tovább probálkoztam a Hilt-el. Nagyon zavart, hogy azért adok át osztályoknak objektumokat, hogy ők továbbadják egy másiknak, ezért ígyekeztem ehhez is beveztni a Hilt rendszerét. Végül sikerült @Inject-álni mindent, ahogy szeretem volna.
 <br> 
 <br> Következőkben egy újabb Activity-t hoztam létre BirdDetail névem, amely a madár részletes adatainak kirajzolásáért felel. Egyenlőre intent-el próbálkozok adatot átküldeni, de egyenlőre nem sikerült.
+
+## 11.hét - 04.21. - 04.27.
+
+A hét folyamán nem sikerült haladjak a feladattal, mivel a sok ZH-ra és házifeladatra kellett koncentráljak.
+
+## 12.hét - 04.28. - 05.04.
+
+Egy új activity-t hoztam létre, amely egy intent-el nyitodik meg egy galériából kiválasztot madár után. A megnyitáshoz bevezettem a Hilt segítségével egy navigator-t, amely képes megnyitni az activity-t. A putextra metódusba 
