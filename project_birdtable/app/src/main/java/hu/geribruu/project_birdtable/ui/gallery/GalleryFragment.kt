@@ -36,10 +36,6 @@ class GalleryFragment : Fragment(), GalleryListAdapter.BirdClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
-
-        view.findViewById<Button>(R.id.button_galery).setOnClickListener {
-            findNavController().navigate(R.id.action_GaleryFragment_to_CameraFragment)
-        }
     }
 
     private fun setupRecyclerView() {
