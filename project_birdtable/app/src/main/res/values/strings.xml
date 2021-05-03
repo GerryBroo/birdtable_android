@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">project_birdtable</string>
+    <string name="app_name">BirdTable</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -11,4 +11,6 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="galery_todo">Galery: TODO</string>
     <string name="take_photo">TAKE PHOTO</string>
+    <string name="bird_gallery">Bird Gallery</string>
+    <string name="bird_detection">Bird Detection</string>
 </resources>

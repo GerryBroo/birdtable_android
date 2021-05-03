@@ -19,7 +19,7 @@
         android:id="@+id/GaleryFragment"
         android:name="hu.geribruu.project_birdtable.ui.gallery.GalleryFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_galery">
+        tools:layout="@layout/fragment_gallery">
 
         <action
             android:id="@+id/action_GaleryFragment_to_CameraFragment"
