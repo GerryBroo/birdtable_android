@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import hu.geribruu.project_birdtable.R
 import hu.geribruu.project_birdtable.navigator.AppNavigator
 import hu.geribruu.project_birdtable.ui.gallery.adapter.GalleryListAdapter
-import kotlinx.android.synthetic.main.fragment_galery.*
+import kotlinx.android.synthetic.main.fragment_gallery.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -29,23 +29,19 @@ class GalleryFragment : Fragment(), GalleryListAdapter.BirdClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_galery, container, false)
+        return inflater.inflate(R.layout.fragment_gallery, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
-
-        view.findViewById<Button>(R.id.button_galery).setOnClickListener {
-            findNavController().navigate(R.id.action_GaleryFragment_to_CameraFragment)
-        }
     }
 
     private fun setupRecyclerView() {
         adapter = GalleryListAdapter(this)
-        recyclerview_galery.adapter = adapter
-        recyclerview_galery.layoutManager = LinearLayoutManager(context)
+        recyclerview_gallery.adapter = adapter
+        recyclerview_gallery.layoutManager = LinearLayoutManager(context)
 
         activity?.let { activity ->
             galleryViewModel.birds.observe(activity, Observer { birds ->

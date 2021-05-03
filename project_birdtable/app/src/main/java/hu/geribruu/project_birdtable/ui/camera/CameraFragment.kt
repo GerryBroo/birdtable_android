@@ -75,9 +75,6 @@ class CameraFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<FloatingActionButton>(R.id.fab_cameraFragment).setOnClickListener {
-            findNavController().navigate(R.id.action_CameraFragment_to_GaleryFragment)
-        }
     }
 
     /** Permissions Request */
@@ -147,6 +144,4 @@ class CameraFragment : Fragment(){
         super.onDestroyView()
         _binding = null
     }
-
-
 }

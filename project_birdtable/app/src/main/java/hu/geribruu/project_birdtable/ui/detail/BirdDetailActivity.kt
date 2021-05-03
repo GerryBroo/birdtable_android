@@ -7,7 +7,6 @@ import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import hu.geribruu.project_birdtable.R
 import kotlinx.android.synthetic.main.activity_bird_detail.*
-import kotlinx.android.synthetic.main.fragment_bird_detail.*
 import java.io.File
 
 @AndroidEntryPoint

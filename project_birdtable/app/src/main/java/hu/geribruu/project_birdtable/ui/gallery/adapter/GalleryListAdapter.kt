@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import de.hdodenhof.circleimageview.CircleImageView
 import hu.geribruu.project_birdtable.R
 import hu.geribruu.project_birdtable.database.model.Bird
-import kotlinx.android.synthetic.main.layout_galery_listitem.view.*
+import kotlinx.android.synthetic.main.layout_gallery_listitem.view.*
 import java.io.File
 
 class GalleryListAdapter(private val onClick : BirdClickListener) : ListAdapter<Bird, GalleryListAdapter.GalleryViewHolder>(BIRDS_COMPARATOR) {
@@ -28,9 +28,9 @@ class GalleryListAdapter(private val onClick : BirdClickListener) : ListAdapter<
     }
 
     class GalleryViewHolder(itemView: View, private val onClick: BirdClickListener) : RecyclerView.ViewHolder(itemView) {
-        private val tvBirdName : TextView = itemView.tv_name_galery_item
-        private val tvBirdCaptureDate : TextView = itemView.tv_date_galery_item
-        private val imgBird : CircleImageView = itemView.img_galery_item
+        private val tvBirdName : TextView = itemView.tv_name_gallery_item
+        private val tvBirdCaptureDate : TextView = itemView.tv_date_gallery_item
+        private val imgBird : CircleImageView = itemView.img_gallery_item
 
         fun bind(bird: Bird, position: Int) {
             tvBirdName.text = bird.name
@@ -50,7 +50,7 @@ class GalleryListAdapter(private val onClick : BirdClickListener) : ListAdapter<
         companion object {
             fun create(parent: ViewGroup, onClick: BirdClickListener): GalleryViewHolder {
                 val view: View = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.layout_galery_listitem, parent, false)
+                    .inflate(R.layout.layout_gallery_listitem, parent, false)
                 return GalleryViewHolder(view, onClick)
             }
         }
