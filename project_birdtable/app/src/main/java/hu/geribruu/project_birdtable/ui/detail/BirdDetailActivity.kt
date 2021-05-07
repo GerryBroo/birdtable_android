@@ -4,6 +4,7 @@ import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import hu.geribruu.project_birdtable.R
 import kotlinx.android.synthetic.main.activity_bird_detail.*
@@ -22,10 +23,7 @@ class BirdDetailActivity : AppCompatActivity() {
             textView_birdname_dy.text = bird.name
             textView_birdtime_dy.text = bird.captureDate
             val imgFile = File(bird.imageUrl)
-            if (imgFile.exists()) {
-                val myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
-                imageView_bird.setImageBitmap(myBitmap)
-            }
+            Picasso.get().load(imgFile).into(imageView_bird)
         })
     }
 }

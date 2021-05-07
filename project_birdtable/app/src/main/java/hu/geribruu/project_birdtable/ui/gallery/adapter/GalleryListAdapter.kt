@@ -1,13 +1,13 @@
 package hu.geribruu.project_birdtable.ui.gallery.adapter
 
-import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ListAdapter
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import hu.geribruu.project_birdtable.R
 import hu.geribruu.project_birdtable.database.model.Bird
@@ -37,10 +37,7 @@ class GalleryListAdapter(private val onClick : BirdClickListener) : ListAdapter<
             tvBirdCaptureDate.text = bird.captureDate
 
             val imgFile = File(bird.imageUrl)
-            if (imgFile.exists()) {
-                val myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
-                imgBird.setImageBitmap(myBitmap)
-            }
+            Picasso.get().load(imgFile).into(imgBird)
 
             itemView.setOnClickListener {
                 onClick.onClick(bird.id)
