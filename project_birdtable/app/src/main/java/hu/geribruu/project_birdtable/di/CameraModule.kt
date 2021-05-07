@@ -12,6 +12,7 @@ import hu.geribruu.project_birdtable.camera.CaptureManager
 import hu.geribruu.project_birdtable.camera.PhotoCapture
 import hu.geribruu.project_birdtable.camera.analyzer.ImageAnalyzer
 import hu.geribruu.project_birdtable.camera.objectdetector.CustomObjectDetector
+import hu.geribruu.project_birdtable.camera.BirdInfoScreen
 import hu.geribruu.project_birdtable.repository.BirdRepositoryImpl
 import javax.inject.Singleton
 
@@ -46,7 +47,8 @@ object CameraModule {
     @Singleton
     @Provides
     fun providesImageAnalyzer(objectDetector: ObjectDetector,
-                              captureManager: CaptureManager) : ImageAnalyzer {
-        return ImageAnalyzer(objectDetector, captureManager)
+                              captureManager: CaptureManager,
+                              birdInfoScreen: BirdInfoScreen) : ImageAnalyzer {
+        return ImageAnalyzer(objectDetector, captureManager, birdInfoScreen)
     }
 }

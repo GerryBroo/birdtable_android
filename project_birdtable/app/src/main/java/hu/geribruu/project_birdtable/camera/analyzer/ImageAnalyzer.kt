@@ -6,22 +6,17 @@ import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.objects.ObjectDetector
-import dagger.hilt.android.AndroidEntryPoint
 import hu.geribruu.project_birdtable.camera.CaptureManager
-import hu.geribruu.project_birdtable.camera.PhotoCapture
-import hu.geribruu.project_birdtable.databinding.FragmentCameraBinding
-import hu.geribruu.project_birdtable.repository.BirdRepositoryImpl
-import hu.geribruu.project_birdtable.ui.camera.CameraViewModel
+import hu.geribruu.project_birdtable.camera.BirdInfoScreen
 import javax.inject.Inject
-import javax.security.auth.callback.Callback
 
 class ImageAnalyzer @Inject constructor(
         private val objectDetector : ObjectDetector,
-        private val captureManager : CaptureManager
+        private val captureManager : CaptureManager,
+        private val infoScreen: BirdInfoScreen
 ) : ImageAnalysis.Analyzer {
 
     var isTakePhoto : Boolean = true
-    var birdName : String = "Detection..."
 
     @SuppressLint("UnsafeExperimentalUsageError")
     override fun analyze(imageProxy: ImageProxy) {
@@ -39,7 +34,7 @@ class ImageAnalyzer @Inject constructor(
                     for (detectedObject in objects) {
                         val name = detectedObject.labels.firstOrNull()?.text ?: "Undefined"
 
-                        birdName = name
+                        infoScreen.birdInfo(name)
                         if(isTakePhoto) {
                             captureManager.manageCapture(name)
                         }
@@ -50,6 +45,7 @@ class ImageAnalyzer @Inject constructor(
                 }
                 .addOnCompleteListener {
                     imageProxy.close()
+                    mediaImage.close()
                 }
         }
     }
